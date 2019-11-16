@@ -1,0 +1,56 @@
+import random
+Alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',]
+wordList = ['twice','bts','programming', 'ece', 'madelao','phone', 'anaconda','python','matlab','function']
+secretWord = random.choice(wordList); word = len(secretWord); lettersGuessed =[]; guessWord =[]
+
+def hangaroo():
+    print ("Hello!")
+    print ("LET'S PLAY HANGAROO!!!")
+    print ("Please only use letters in lowercase!")
+hangaroo()
+
+def program():
+    for character in secretWord:
+        guessWord.append("_")
+        
+    print ("The word consists of", word, "letters.")
+    print (' '.join(guessWord))
+    print ("You can only make 5 mistakes!") 
+        
+def game():
+    turns = 0
+    while turns < 5:
+        print ("\n", ' '.join(Alphabet))
+        guess = input("Letter: \n").lower()
+        
+        if guess not in Alphabet:
+            print ("This is not a Letter, Please choose one more time...")
+            turns +=1
+            print("Wrong Guesses: ", turns)
+        elif guess in lettersGuessed:
+            print("You have already chosen this letter, Please choose one more time...")
+        else:
+            lettersGuessed.append(guess)
+            if guess in secretWord:
+                print ("Great! You are on a roll!")
+                for x in range(0, word):
+                    if secretWord[x] == guess:
+                        guessWord[x] = guess
+                        print(' '.join(guessWord))
+                Alphabet.remove(guess)
+                
+            else:
+                print("Wrong. Please choose one more time...")
+                Alphabet.remove(guess)
+                turns += 1
+                print("Wrong Guesses: ", turns)
+                if turns == 4:
+                    print("Oh no! You have lost the game!.")
+                    print("The secret word was:", secretWord)
+                    print("Try Again Next Time!")
+                    break
+        if '_' not in guessWord:
+                        print("WINNER WINNER CHICKEN DINNER!!!")
+                        break              
+program()
+game()
